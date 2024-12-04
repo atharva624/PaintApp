@@ -147,9 +147,8 @@ namespace PaintApp
             isDrawing = false;
             if (drawingMode == "Straight Line")
             {
-                // Finalize the straight line drawing once mouse is released
-                currentLine = null;  // Set currentLine to null to stop drawing a straight line
-            }
+                
+                currentLine = null;              }
         }
     }
 }
