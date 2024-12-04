@@ -35,7 +35,7 @@
             </ComboBox>
         </ToolBar>
 
-        <Canvas x:Name="DrawingCanvas" MouseDown="OnCanvasMouseDown" MouseMove="OnCanvasMouseMove" HorizontalAlignment="Center" Height="316" Margin="0,108,0,0" VerticalAlignment="Top" Width="780">
+        <Canvas x:Name="DrawingCanvas" MouseDown="OnCanvasMouseDown" MouseUp="OnCanvasMouseUp" MouseMove="OnCanvasMouseMove" HorizontalAlignment="Center" Height="382" Margin="0,42,0,0" VerticalAlignment="Top" Width="780">
             <Canvas.Background>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Canvas.Background>

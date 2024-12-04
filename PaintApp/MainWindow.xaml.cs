@@ -8,10 +8,12 @@ namespace PaintApp
 {
     public partial class MainWindow : Window
     {
-         Point lastPoint;
-         double brushSize = 2;
-         Brush brushColor = Brushes.Black;
-         string drawingMode = "Free Draw";
+        Point lastPoint;
+        Line currentLine;
+        bool isDrawing;
+        double brushSize = 2;
+        Brush brushColor = Brushes.Black;
+        string drawingMode = "Free Draw";
 
         public MainWindow()
         {
@@ -62,6 +64,9 @@ namespace PaintApp
                     case "Blue":
                         brushColor = Brushes.Blue;
                         break;
+                    case "Yellow":
+                        brushColor = Brushes.Yellow;
+                        break;
                     case "Green":
                         brushColor = Brushes.Green;
                         break;
@@ -84,17 +89,34 @@ namespace PaintApp
 
         private void OnCanvasMouseDown(object sender, MouseButtonEventArgs e)
         {
+            isDrawing = true;
             if (e.ButtonState == MouseButtonState.Pressed)
                 lastPoint = e.GetPosition(DrawingCanvas);
+
+            if (drawingMode == "Straight Line")
+            {
+                currentLine = new Line
+                {
+                    Stroke = brushColor,
+                    StrokeThickness = brushSize,
+                    X1 = lastPoint.X,
+                    Y1 = lastPoint.Y,
+                    X2 = lastPoint.X, 
+                    Y2 = lastPoint.Y
+                };
+                DrawingCanvas.Children.Add(currentLine);
+            }
         }
 
         private void OnCanvasMouseMove(object sender, MouseEventArgs e)
         {
+            if (!isDrawing) return;
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 if (drawingMode == "Free Draw")
                 {
-                    var line = new Line
+                   
+                    Line line = new Line
                     {
                         Stroke = brushColor,
                         StrokeThickness = brushSize,
@@ -110,20 +132,23 @@ namespace PaintApp
                 }
                 else if (drawingMode == "Straight Line")
                 {
-                    DrawingCanvas.Children.Clear();
-
-                    var line = new Line
+                    if (currentLine != null)
                     {
-                        Stroke = brushColor,
-                        StrokeThickness = brushSize,
-                        X1 = lastPoint.X,
-                        Y1 = lastPoint.Y,
-                        X2 = e.GetPosition(DrawingCanvas).X,
-                        Y2 = e.GetPosition(DrawingCanvas).Y
-                    };
-
-                    DrawingCanvas.Children.Add(line);
+                        Point currentPoint = e.GetPosition(DrawingCanvas);
+                        currentLine.X2 = currentPoint.X;
+                        currentLine.Y2 = currentPoint.Y;
+                    }
                 }
+            }
+        }
+
+        private void OnCanvasMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            isDrawing = false;
+            if (drawingMode == "Straight Line")
+            {
+                // Finalize the straight line drawing once mouse is released
+                currentLine = null;  // Set currentLine to null to stop drawing a straight line
             }
         }
     }
