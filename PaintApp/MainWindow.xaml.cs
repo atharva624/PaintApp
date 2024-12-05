@@ -147,8 +147,12 @@ namespace PaintApp
             isDrawing = false;
             if (drawingMode == "Straight Line")
             {
-                
                 currentLine = null;              }
+        }
+
+        private void OnEraseButtonClick(object sender, RoutedEventArgs e)
+        {
+            brushColor = Brushes.White;
         }
     }
 }

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Paint App" Height="450" Width="800">
     <Grid>
-        <ToolBar HorizontalAlignment="Left" Height="34" Margin="0,3,0,0" VerticalAlignment="Top" Width="790">
+        <ToolBar HorizontalAlignment="Center" Height="37" VerticalAlignment="Top" Width="800">
             <Button Content="Clear" Height="57" Width="62" Click="OnClearButtonClick"/>
 
             <Label Content="Brush Size:" VerticalAlignment="Center" Margin="5,0"/>
@@ -33,9 +33,10 @@
                 <ComboBoxItem>Free Draw</ComboBoxItem>
                 <ComboBoxItem>Straight Line</ComboBoxItem>
             </ComboBox>
+            <Button Content="Erase" Width="47" Height="22" Click="OnEraseButtonClick"/>
         </ToolBar>
 
-        <Canvas x:Name="DrawingCanvas" MouseDown="OnCanvasMouseDown" MouseUp="OnCanvasMouseUp" MouseMove="OnCanvasMouseMove" HorizontalAlignment="Center" Height="382" Margin="0,42,0,0" VerticalAlignment="Top" Width="780">
+        <Canvas x:Name="DrawingCanvas" MouseDown="OnCanvasMouseDown" MouseUp="OnCanvasMouseUp" MouseMove="OnCanvasMouseMove" HorizontalAlignment="Center" Height="382" Margin="0,42,0,0" VerticalAlignment="Top" Width="800">
             <Canvas.Background>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Canvas.Background>
